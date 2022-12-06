@@ -1,21 +1,39 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 let mysql = require('mysql2');
 
+const cors = require("cors");
+
+app.use(express.json());
+app.use(cors());
 const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'ShadowWarrior2',   
-    database: 'cruddatabase',
+    password: 'ShadowWarrior2',
+    database: 'loginsystem',
 });
 
-app.get('/', (req, res) =>{
-    const sqlInsert = "INSERT INTO movie_review (id, movieName, movieReview) VALUES ('3', 'Inception', 'Good Movie');"
+/*app.get('/', (req, res) =>{
+    const sqlInsert = "INSERT INTO users (id, movieName, movieReview) VALUES ('3', 'Inception', 'Good Movie');"
    
     db.query(sqlInsert, (err, result)=>{
         res.send("Hello wod");
     });
    
+});*/
+
+app.post('/register', (req, res) => {
+
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.query(
+        "INSERT INTO users (username, password) VALUES (?,?)",
+        [username, password],
+        (err, result) => {
+            console.log(err);
+        }
+    );
 });
 
 app.listen(3001, () => {
