@@ -11,6 +11,8 @@ function App() {
 
   const [loginStatus, setLoginStatus] = useState("")
 
+  const [message, setMessage] = useState('');
+
   const register = () =>{
     Axios.post('http://localhost:3001/register',
      {username: usernameReg, 
@@ -18,6 +20,8 @@ function App() {
     }).then((response)=> {
       console.log(response);
     });
+    setUsernameReg('');
+    setPasswordReg('');
   }
 
   const login = () =>{
@@ -26,12 +30,15 @@ function App() {
       password: password
     }).then((response)=> {
       console.log(response.data);
+    
       if(response.data.message){
         setLoginStatus(response.data.message)
       }
       else{
         setLoginStatus(response.data[0].username)
       }
+      setUsername('');
+      setPassword('');
     });
   }
 
@@ -41,12 +48,16 @@ function App() {
         <h1>Registration</h1>
         <div className="form">
           <label>Username</label>
-          <input type="text" onChange={(e) => {
+          <input type="text"
+            value={usernameReg}
+            onChange={(e) => {
             setUsernameReg(e.target.value)
           }}>
           </input>
           <label>Password</label>
-          <input type="text"  onChange={(e) => {
+          <input type="text"
+            value={passwordReg}
+            onChange={(e) => {
             setPasswordReg(e.target.value)
           }}>
           </input>
@@ -58,19 +69,21 @@ function App() {
         <div className="form">
           <input type="text"
            placeholder="Username..."
+           value={username}
            onChange={(e) => {
             setUsername(e.target.value)
           }}>
            </input>
           <input type="text"
            placeholder="password..."
+           value={password}
            onChange={(e) => {
             setPassword(e.target.value)
           }}></input>
           <button onClick={login}>Login</button>
         </div>
       </div>
-      <h1>{loginStatus}</h1>
+      <h1 className="confirmation">{loginStatus}</h1>
     </div>
 
   );

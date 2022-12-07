@@ -1,5 +1,8 @@
 .App{
   text-align: center;
+  background-color: #EFFFFB;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
 .form{
@@ -11,4 +14,38 @@
   width: 300px;
   height: 60px;
   margin: 10px;
+}
+
+.App input{
+  border-radius: 0.5rem;
+}
+
+.App button{
+  background-color: #4F98CA;
+  margin: 1rem 1.5rem;
+  color: #EFFFFB;
+  font-size: 2rem;
+  border-radius: 1.5rem;
+}
+
+.registration{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation{
+  background-color: #50D890;
+  margin: 1rem 1.5rem;
+  color: #EFFFFB;
+  font-size: 2rem;
+  border-radius: 1.5rem;
 }
