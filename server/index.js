@@ -36,6 +36,29 @@ app.post('/register', (req, res) => {
     );
 });
 
+app.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.query(
+        "SELECT * FROM USERS WHERE username = ? AND password = ?",
+        [username, password],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({ err: err })
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ message: "Wrong username/password" });
+            }
+        }
+    );
+})
+
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });
