@@ -32,8 +32,11 @@ app.post('/register', (req, res) => {
         [username, password],
         (err, result) => {
             console.log(err);
+            res.send( {message: "Successful"});
         }
     );
+
+   
 });
 
 app.post('/login', (req, res) => {

@@ -10,7 +10,7 @@ function App() {
   const [password, setPassword] = useState("")
 
   const [loginStatus, setLoginStatus] = useState("")
-
+  const [registerStatus, setRegisterStatus] = useState("");
   const [message, setMessage] = useState('');
 
   const register = () =>{
@@ -18,7 +18,12 @@ function App() {
      {username: usernameReg, 
       password: passwordReg
     }).then((response)=> {
-      console.log(response);
+      if(response.data.message){
+        setRegisterStatus(response.data.message)
+      }
+      else{
+        setRegisterStatus("Register Failed, username exists in database")
+      }
     });
     setUsernameReg('');
     setPasswordReg('');
@@ -63,7 +68,9 @@ function App() {
           </input>
           <button onClick={register}>Register</button>
         </div>
+        
       </div>
+      <h1 className="confirmation">{registerStatus}</h1>
       <div className="login">
         <h1>Login</h1>
         <div className="form">
